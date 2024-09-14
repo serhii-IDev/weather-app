@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:200,regular&display" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Inter:100,200,regular,900,600italic&display" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>Weather App</title>
+</head>
+
+<body>
+    <div id="weather" class="wrapper __container">
+        <div class="block-info">
+            <div class="block-info__btn">
+                <div class="theme">
+                    <button class="theme-btn__f">°C</button>
+                    <button class="theme-btn__c">°F</button>
+                </div>
+            </div>
+            <div class="block-info__icon">
+                <img class="icon-weather" src="src/img/WeatherIcon - 2-40.svg" alt="night-cloudy">
+            </div>
+            <div class="block-info__degrees">
+                <div id="degrees" class="degrees">
+                    0
+                </div>
+            </div>
+            <div class="block-info__date">
+                <div id="date-today" class="date">
+                    17th Jun ‘21
+                </div>
+                <div class="days-time">
+                    <div id="day-of-week" class="day">
+                        Thrusday
+                    </div>
+                    <div id="time" class="time">
+                        2:45 
+                    </div>
+                </div>
+            </div>
+            <div class="block-info__other">
+                <div class="other-info">
+                    <img class="other-info__icon" src="src/img/icons/wind.svg" alt="wind-icon">
+                    <span class="other-info__name">
+                        Wind
+                    </span>
+                    <span id="wind-speed" class="other-info__measure">
+                        0 km/h
+                    </span>
+                </div>
+                <div class="other-info">
+                    <img class="other-info__icon" src="src/img/icons/hum.svg" alt="hum-icon">
+                    <span class="other-info__name">
+                        Hum
+                    </span>
+                    <span id="hum" class="other-info__measure">
+                        0 %
+                    </span>
+                </div>
+                <div class="other-info">
+                    <img class="other-info__icon" src="src/img/icons/rain.svg" alt="rain-icon">
+                    <span class="other-info__name">
+                        Rain
+                    </span>
+                    <span id="rain" class="other-info__measure">
+                        ... %
+                    </span>
+                </div>
+            </div>
+            <div class="block-info__slider">
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Mon
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Tue
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Wed
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Thu
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Fri
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Sat
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Sun
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Mon
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Tue
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Wed
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Thu
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Fri
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Sat
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide">
+                                <div class="slide-degrees">
+                                    24
+                                </div>
+                                <div class="slide-icon">
+                                    <img src="src/img/WeatherIcon - 2-40.svg" alt="weather-icon">
+                                </div>
+                                <div class="slide-day">
+                                    Sun
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+        <div class="search-block">
+            <div class="search">
+                <form class="search-form" action="#">
+                    <div id="place" class="search-place">
+                        <img class="search-place__icon" src="src/img/icons/map.svg" alt="map-icon">
+                        <div class="search-place__place">Lutsk</div>
+                    </div>
+                    <input class="search-input" type="text">
+                    <button class="search-btn">
+                        <img class="search-icon" src="src/img/icons/search.svg" alt="search-icon">
+                    </button>
+                </form>
+            </div>
+            <div class="block-clocks">
+                <button class="block-clocks__btn">
+                    i
+                </button>
+                <div class="block-clock">
+                    <h2 class="block-clock__title">
+                        Sunrise
+                    </h2>
+                    <div class="clock">
+                        <div class="clock-arrows">
+                            <img class="clock-arrows-icon" src="src/img/icons/clock-arrows.svg" alt="clock-arrows">
+                        </div>
+                        <div class="clock-hours">
+                            <h2 id="sunrise" class="clock-hour">
+                                00:00
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-clock__big">
+                    <h2 class="block-clock__title-big">
+                        Golden Hour
+                    </h2>
+                    <div class="clock__big">
+                        <div class="clock-arrows">
+                            <img class="clock-arrows-icon" src="src/img/icons/clock-arrows.svg" alt="clock-arrows">
+                        </div>
+                        <div class="clock-hours">
+                            <h2 class="clock-hour">
+                                15:24 
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-clock">
+                    <h2 class="block-clock__title">
+                        Sunset
+                    </h2>
+                    <div class="clock">
+                        <div class="clock-arrows">
+                            <img class="clock-arrows-icon" src="src/img/icons/clock-arrows.svg" alt="clock-arrows">
+                        </div>
+                        <div class="clock-hours">
+                            <h2 id="sunset" class="clock-hour">
+                                00:00
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-other">
+                <div class="air-quality">
+                    <h2 class="air-quality__title">
+                        Air Quality
+                    </h2>
+                    <div class="air-quality__chart">
+                        <div class="chart">
+                            <div class="chart-info">
+                                <div class="chart-progress">
+                                    <img src="src/img/icons/chart.svg" alt="chart">
+                                    <div class="chart-progress__numbers">
+                                        <span>2/5</span>
+                                        <span class="chart-progress__text">Moderate</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uv-index">
+                    <h2 class="uv-index__title">
+                        UV Index
+                    </h2>
+                    <div class="uv-index__chart">
+                        <div class="chart">
+                            <div class="chart-info">
+                                <div class="chart-progress">
+                                    <img src="src/img/icons/chart.svg" alt="chart">
+                                    <div class="chart-progress__numbers">
+                                        <span>6/10</span>
+                                        <span class="chart-progress__text">High</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="src/js/script.js"></script>
+</body>
+
+</html>
