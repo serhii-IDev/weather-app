@@ -1,6 +1,6 @@
-
 const apiKey = '0fec4cb5bafa4bb7cee3ff72723b3d32';
 const weatherBlock = document.querySelector('#weather');
+const blockNowDeg = document.querySelector('.block-info__degrees');
 const nowDeg = document.querySelector('.degrees');
 const wind = document.querySelector('#wind-speed');
 const hum = document.querySelector('#hum');
@@ -11,6 +11,48 @@ const sunset = document.querySelector('#sunset');
 const dateToDay = document.querySelector('#date-today');
 const dayWeek = document.querySelector('#day-of-week');
 const time = document.querySelector('#time');
+const weatherIconBlock = document.querySelector('.block-info__icon');
+
+//------country-----------------------------------------------------------------
+
+const countryNames = {
+  'US': 'United States',
+  'GB': 'United Kingdom',
+  'CA': 'Canada',
+  'FR': 'France',
+  'DE': 'Germany',
+  'IT': 'Italy',
+  'UA': 'Ukraine',
+  'JP': 'Japan',
+  'CN': 'China',
+};
+
+function getCountryFullName(countryCode) {
+  return countryNames[countryCode] || 'Unknown Country'; 
+}
+
+//--------icon-----------------------------------------------------------------
+
+const weatherIcons = {
+  '01d': 'src/img/icons/weather/sunny.png',  // Ясно вдень
+  '01n': 'src/img/icons/weather/clear-night.png', // Ясно вночі
+  '02d': 'src/img/icons/weather/partly-cloudy-day.png', // Мало хмар вдень
+  '02n': 'src/img/icons/weather/partly-cloudy-night.png', // Мало хмар вночі
+  '03d': 'src/img/icons/weather/cloudy-day.png', // Хмарно
+  '03n': 'src/img/icons/weather/cloudy-night.png', // Хмарно
+  '04d': 'src/img/icons/weather/overcast.png', // Дуже хмарно
+  '04n': 'src/img/icons/weather/overcast.png', // Дуже хмарно
+  '09d': 'src/img/icons/weather/showers.png', // Зливи
+  '09n': 'src/img/icons/weather/showers.png', // Зливи
+  '10d': 'src/img/icons/weather/rain.png', // Дощ вдень
+  '10n': 'src/img/icons/weather/rain.png', // Дощ вночі
+  '11d': 'src/img/icons/weather/thunderstorm.png', // Гроза
+  '11n': 'src/img/icons/weather/thunderstorm.png', // Гроза
+  '13d': 'src/img/icons/weather/snow.png', // Сніг
+  '13n': 'src/img/icons/weather/snow.png', // Сніг
+  '50d': 'src/img/icons/weather/mist.png', // Туман
+  '50n': 'src/img/icons/weather/mist.png', // Туман
+};
 
 //------------------------------------------------------------------------
 
@@ -18,44 +60,49 @@ const inp = document.querySelector('.search-input');
 const btnSearch = document.querySelector('.search-btn');
 const placeBlock = document.querySelector('#place');
 const place = document.querySelector('.search-place__place');
+
+let inpValue = '';
 let where = 'Lutsk';
 
+function apdateValue() {
+  inpValue = inp.value;
+  if (inpValue !== '') {
+    where = inpValue;
+    loadWeather()
+  }
+}
+
+btnSearch.addEventListener('click', apdateValue);
 
 btnSearch.addEventListener('click', () => {
-  
-  where = document.querySelector('.search-place__place').textContent;
-  console.log(where);
-})
-
-
-
-
-
-
-
+  if (inp.value !== '' || inp.classList.contains('__active')) {
+    inp.classList.toggle('__active');
+    placeBlock.classList.toggle('__active');
+    inp.value = '';
+  }
+});
 
 //-----------------------------------------------------------------------------
 
-if (where != '') {
-  async function loadWeather(e) {
+async function loadWeather(e) {
+  if(!where) return;
 
-    const server = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${where}&appid=${apiKey}`;
-    const response = await fetch(server, {
-      method: 'GET',
-    });
-    const responseResult = await response.json();
-  
-    if (response.ok) {
-      getWeather(responseResult);
-    } else {
-      weatherBlock.innerHTML = responseResult.message;
-    }
+  const server = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${where}&appid=${apiKey}`;
+  const response = await fetch(server, {
+    method: 'GET',
+  });
+  const responseResult = await response.json();
+
+  if (response.ok) {
+    getWeather(responseResult);
+  } else {
+    weatherBlock.innerHTML = responseResult.message;
   }
+}
 
-  if(weatherBlock) {
-    loadWeather()
-  } 
-} 
+if (weatherBlock) {
+  loadWeather()
+}
 
 
 function getWeather(data) {
@@ -71,24 +118,28 @@ function getWeather(data) {
   const sunSet = data.sys.sunset;
   const sunRise = data.sys.sunrise;
   const dt = data.dt;
+  const country = data.sys.country;
 
+  const weatherIconUrl = weatherIcons[weatherIcon] || 'src/img/icons/weather/default.png';
 
+  place.textContent = `${location}, ${getCountryFullName(country)}`;
   nowDeg.textContent = temp;
   wind.textContent = windSpeed + ' km/h';
   hum.textContent = humPercent + ' %';
+  weatherIconBlock.innerHTML = `<img class='icon-weather' src="${weatherIconUrl}" alt="${data.weather[0].description}" />`
 
   function convertUnixTimestamp(e) {
     // Створюємо об'єкт дати, переводимо у мілісекунди
     const date = new Date(e * 1000);
-  
+
     // Отримуємо локальний час
     const formattedTime = date.toLocaleTimeString(); // Формат часу
-  
+
     // Повертаємо результат у вигляді часу
-    
+
     return formattedTime;
   }
-  
+
   const sunRiseResult = convertUnixTimestamp(sunRise);
   const sunSetResult = convertUnixTimestamp(sunSet);
 
@@ -98,12 +149,12 @@ function getWeather(data) {
   function convertUnixDatetamp(e) {
     // Створюємо об'єкт дати, переводимо у мілісекунди
     const date = new Date(e * 1000);
-  
+
     // Отримуємо локальну дату
     const formattedDate = date.toLocaleDateString(); // Формат часу
-  
+
     // Повертаємо результат у вигляді дати
-    
+
     return formattedDate;
   }
 
@@ -126,7 +177,7 @@ function getWeather(data) {
 
   if (firstLaterMonth === '0') {
     monthNumber = monthNumber.slice(1, 2);
-  } 
+  }
 
   function getMonthNumber(monthNumber) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -151,6 +202,8 @@ function getWeather(data) {
 
   dayWeek.textContent = dayOfWeek;
   dateToDay.textContent = `${day} ${month} ${year}`;
+
+  
 }
 
 
@@ -162,12 +215,26 @@ function getWeather(data) {
 const btnTheme = document.querySelector('.theme');
 const btnF = document.querySelector('.theme-btn__f');
 
-if (btnTheme) {
-  btnTheme.addEventListener('click', () => {
-    btnF.classList.toggle('bg');
-  })
+function replacementСelsius(deg) {
+  nowDeg.textContent = Math.round((+deg * 9 / 5) + 32);
 }
 
+function replacementFahrenheit(deg) {
+  nowDeg.textContent = Math.round((+deg - 32) * 5 / 9);
+}
+
+if (btnTheme) {
+  btnTheme.addEventListener('click', () => {
+    blockNowDeg.classList.toggle('repl');
+    btnF.classList.toggle('bg');
+    if (btnF.classList.contains('bg')) {
+      replacementСelsius(nowDeg.textContent);
+    } else {
+      replacementFahrenheit(nowDeg.textContent);
+    }
+
+  })
+}
 
 //--------------------------------------------------------------
 
