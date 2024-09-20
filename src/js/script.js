@@ -28,7 +28,7 @@ const countryNames = {
 };
 
 function getCountryFullName(countryCode) {
-  return countryNames[countryCode] || 'Unknown Country'; 
+  return countryNames[countryCode] || 'Unknown Country';
 }
 
 //--------icon-----------------------------------------------------------------
@@ -52,6 +52,7 @@ const weatherIcons = {
   '13n': 'src/img/icons/weather/snow.png', // Сніг
   '50d': 'src/img/icons/weather/mist.png', // Туман
   '50n': 'src/img/icons/weather/mist.png', // Туман
+
 };
 
 //------------------------------------------------------------------------
@@ -68,7 +69,9 @@ function apdateValue() {
   inpValue = inp.value;
   if (inpValue !== '') {
     where = inpValue;
+    swiperWrapper.innerHTML = '';
     loadWeather()
+    loadWeatherFiveDays()
   }
 }
 
@@ -79,13 +82,14 @@ btnSearch.addEventListener('click', () => {
     inp.classList.toggle('__active');
     placeBlock.classList.toggle('__active');
     inp.value = '';
+    
   }
 });
 
 //-----------------------------------------------------------------------------
 
 async function loadWeather(e) {
-  if(!where) return;
+  if (!where) return;
 
   const server = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${where}&appid=${apiKey}`;
   const response = await fetch(server, {
@@ -103,7 +107,6 @@ async function loadWeather(e) {
 if (weatherBlock) {
   loadWeather()
 }
-
 
 function getWeather(data) {
   console.log(data);
@@ -203,10 +206,82 @@ function getWeather(data) {
   dayWeek.textContent = dayOfWeek;
   dateToDay.textContent = `${day} ${month} ${year}`;
 
-  
+
 }
 
+//------------Five-days--------------------------------------------------------------------------
 
+const slideDegrees = document.querySelector('.slide-degrees');
+const slideIcon = document.querySelector('.slide-icon');
+const slideDay = document.querySelector('.slide-day')
+const swiperWrapper = document.querySelector('.swiper-wrapper');
+
+async function loadWeatherFiveDays(e) {
+  if (!where) return;
+
+  const server = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${where}&appid=${apiKey}`;
+  const response = await fetch(server, {
+    method: 'GET',
+  });
+  const responseResult = await response.json();
+
+  if (response.ok) {
+    getWeatherFiveDays(responseResult);
+  } else {
+    weatherBlock.innerHTML = responseResult.message;
+  }
+
+}
+
+function getWeatherFiveDays(data) {
+  console.log(data);
+
+  let index = 0;
+
+  while (index < 35) {
+    if(index == 32) {
+      index += 7;
+    } else {
+      index += 8;
+    }
+    console.log(index);
+    const day = (data.list[index].dt_txt).slice(0, 10);
+    const degrees = Math.round(data.list[index].main.temp);
+    const weatherIcon = data.list[index].weather[0].icon;
+    const weatherIconUrl = weatherIcons[weatherIcon] || 'src/img/icons/weather/default.png';
+
+    function getDayOfWeek(dateString) {
+      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const date = new Date(dateString);
+      const dayOfWeek = date.getDay();
+
+      return daysOfWeek[dayOfWeek];
+    }
+
+    const dayOfWeek = (getDayOfWeek(day)).slice(0, 3);
+    const slide = `
+        <div class="swiper-slide">
+          <div class="slide">
+            <div class="slide-degrees">
+              ${degrees}
+            </div>
+            <div class="slide-icon">
+              <img class="slide-icon__img" src="${weatherIconUrl}" alt="" ${data.list[index].weather[0].description}/>
+            </div>
+            <div class="slide-day">
+              ${dayOfWeek}
+            </div>
+          </div>
+        </div>                      
+      `
+    swiperWrapper.innerHTML += slide
+  }
+
+}
+
+if(weatherBlock) {
+  loadWeatherFiveDays()
+}
 
 
 
