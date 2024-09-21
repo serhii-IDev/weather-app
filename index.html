@@ -14,6 +14,16 @@
 <body>
     <div id="weather" class="wrapper __container">
         <div class="block-info">
+            <form class="search-form" action="#">
+                <div id="place-mob" class="search-place __active">
+                    <img class="search-place__icon" src="src/img/icons/map.svg" alt="map-icon">
+                    <div class="search-place__place-mob"></div>
+                </div>
+                <input class="search-input-mob __active" type="text">
+                <button class="search-btn-mob">
+                    <img class="search-icon" src="src/img/icons/search.svg" alt="search-icon">
+                </button>
+            </form>
             <div class="block-info__btn">
                 <div class="theme">
                     <button class="theme-btn__f">°C</button>
@@ -36,37 +46,32 @@
                         Thrusday
                     </div>
                     <div id="time" class="time">
-                        2:45 
+                        2:45
                     </div>
                 </div>
             </div>
             <div class="block-info__other">
                 <div class="other-info">
                     <img class="other-info__icon" src="src/img/icons/wind.svg" alt="wind-icon">
-                    <span class="other-info__name">
-                        Wind
-                    </span>
-                    <span id="wind-speed" class="other-info__measure">
-                        0 km/h
-                    </span>
+                    <div class="other-info__block">
+                        <span class="other-info__name">
+                            Wind
+                        </span>
+                        <span id="wind-speed" class="other-info__measure">
+                            0 km/h
+                        </span>
+                    </div>
                 </div>
                 <div class="other-info">
                     <img class="other-info__icon" src="src/img/icons/hum.svg" alt="hum-icon">
-                    <span class="other-info__name">
-                        Hum
-                    </span>
-                    <span id="hum" class="other-info__measure">
-                        0 %
-                    </span>
-                </div>
-                <div class="other-info">
-                    <img class="other-info__icon" src="src/img/icons/rain.svg" alt="rain-icon">
-                    <span class="other-info__name">
-                        Rain
-                    </span>
-                    <span id="rain" class="other-info__measure">
-                        ... %
-                    </span>
+                    <div class="other-info__block">
+                        <span class="other-info__name">
+                            Hum
+                        </span>
+                        <span id="hum" class="other-info__measure">
+                            0 %
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="block-info__slider">
@@ -122,7 +127,7 @@
                         </div>
                         <div class="clock-hours">
                             <h2 class="clock-hour">
-                                15:24 
+                                15:24
                             </h2>
                         </div>
                     </div>

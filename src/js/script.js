@@ -62,11 +62,22 @@ const btnSearch = document.querySelector('.search-btn');
 const placeBlock = document.querySelector('#place');
 const place = document.querySelector('.search-place__place');
 
+//--mob--
+
+const inpMob = document.querySelector('.search-input-mob');
+const btnSearchMob = document.querySelector('.search-btn-mob');
+const placeBlockMob = document.querySelector('#place-mob');
+const placeMob = document.querySelector('.search-place__place-mob');
+
 let inpValue = '';
 let where = 'Lutsk';
 
 function apdateValue() {
-  inpValue = inp.value;
+  if (inpMob.classList.contains('__active')) {
+    inpValue = inp.value;
+  } else {
+    inpValue = inpMob.value;
+  }
   if (inpValue !== '') {
     where = inpValue;
     swiperWrapper.innerHTML = '';
@@ -82,9 +93,22 @@ btnSearch.addEventListener('click', () => {
     inp.classList.toggle('__active');
     placeBlock.classList.toggle('__active');
     inp.value = '';
+  }
+});
+
+//--mob--
+
+btnSearchMob.addEventListener('click', apdateValue);
+
+btnSearchMob.addEventListener('click', () => {
+  if (inpMob.value !== '' || inpMob.classList.contains('__active')) {
+    inpMob.classList.toggle('__active');
+    placeBlockMob.classList.toggle('__active');
+    inpMob.value = '';
     
   }
 });
+
 
 //-----------------------------------------------------------------------------
 
@@ -113,8 +137,6 @@ function getWeather(data) {
 
   const location = data.name;
   const temp = Math.round(data.main.temp);
-  const feelsLike = Math.round(data.main.feels_like);
-  const weatherStatus = data.weather[0].main;
   const weatherIcon = data.weather[0].icon;
   const humPercent = Math.round(data.main.humidity);
   const windSpeed = Math.round(data.wind.speed);
@@ -125,6 +147,7 @@ function getWeather(data) {
 
   const weatherIconUrl = weatherIcons[weatherIcon] || 'src/img/icons/weather/default.png';
 
+  placeMob.textContent = `${location}, ${getCountryFullName(country)}`;
   place.textContent = `${location}, ${getCountryFullName(country)}`;
   nowDeg.textContent = temp;
   wind.textContent = windSpeed + ' km/h';
@@ -244,7 +267,6 @@ function getWeatherFiveDays(data) {
     } else {
       index += 8;
     }
-    console.log(index);
     const day = (data.list[index].dt_txt).slice(0, 10);
     const degrees = Math.round(data.list[index].main.temp);
     const weatherIcon = data.list[index].weather[0].icon;
@@ -324,15 +346,15 @@ new Swiper('.swiper', {
   breakpoints: {
     "@0.00": {
       slidesPerView: 1,
-      spaceBetween: 54,
+      spaceBetween: 34,
     },
     "@0.75": {
       slidesPerView: 2,
-      spaceBetween: 54,
+      spaceBetween: 34,
     },
     "@1.00": {
       slidesPerView: 3,
-      spaceBetween: 54,
+      spaceBetween: 34,
     },
     "@1.50": {
       slidesPerView: 4,
