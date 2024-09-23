@@ -168,11 +168,18 @@ body {
   }
 }
 .block-info__icon {
-  width: 100%;
-  max-width: 143px;
-  height: 100%;
-  max-height: 380px;
+  width: 150px;
+  height: 150px;
   margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+@media (max-width: 450px) {
+  .block-info__icon {
+    margin-bottom: 5px;
+  }
 }
 .block-info__degrees {
   display: inline-block;
@@ -228,6 +235,14 @@ body {
   position: relative;
 }
 
+.search-place__place {
+  width: 100%;
+  max-width: 300px;
+  margin-right: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .block-info > form {
   display: none;
 }
@@ -277,13 +292,6 @@ body {
   .block-info__degrees.repl::after {
     font-size: 30px;
   }
-}
-
-.icon-weather {
-  width: 100%;
-  max-width: 143px;
-  min-width: 140px;
-  height: 100%;
 }
 
 .theme {
@@ -382,10 +390,10 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  padding-right: 27px;
 }
 .other-info:not(:last-child) {
   margin-right: 30px;
+  padding-right: 40px;
 }
 .other-info:not(:last-child):after {
   content: "";
@@ -397,6 +405,11 @@ body {
   background-color: #fff;
 }
 
+@media (max-width: 346px) {
+  .other-info::after {
+    display: none;
+  }
+}
 .other-info__icon {
   margin: -3px 11px 0px 0px;
   width: 22px;
@@ -458,6 +471,7 @@ body {
   display: flex;
   height: 100%;
   align-items: center;
+  margin-bottom: 7px;
 }
 
 .search-place {
@@ -473,7 +487,7 @@ body {
 }
 .search-place__place, .search-place__place-mob {
   width: 100%;
-  max-width: 380px;
+  max-width: 73%;
   overflow: hidden;
   text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
   font-size: 32px;
