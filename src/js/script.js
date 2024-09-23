@@ -297,6 +297,7 @@ function getWeatherFiveDays(data) {
         </div>                      
       `
     swiperWrapper.innerHTML += slide
+    swiper.update();
   }
 
 }
@@ -335,7 +336,7 @@ if (btnTheme) {
 
 //--------------------------------------------------------------
 
-new Swiper('.swiper', {
+let swiper = new Swiper('.swiper', {
   slidesPerView: 1,
   spaceBetween: 54,
   speed: 500,
@@ -344,19 +345,39 @@ new Swiper('.swiper', {
     prevEl: '.swiper-button-prev',
   },
   breakpoints: {
-    "@0.00": {
-      slidesPerView: 1,
+    0: {
+      slidesPerView: 3,
+      spaceBetween: 5,
+    },
+    320: {
+      slidesPerView: 3,
+      spaceBetween: 17,
+    },
+    400: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    430: {
+      slidesPerView: 3,
+      spaceBetween: 44,
+    },
+    525: {
+      slidesPerView: 4,
       spaceBetween: 34,
     },
-    "@0.75": {
-      slidesPerView: 2,
+    720: {
+      slidesPerView: 5,
       spaceBetween: 34,
     },
-    "@1.00": {
+    996: {
       slidesPerView: 3,
       spaceBetween: 34,
     },
-    "@1.50": {
+    1200: {
+      slidesPerView: 4,
+      spaceBetween: 34,
+    },
+    1400: {
       slidesPerView: 4,
       spaceBetween: 54,
     }
